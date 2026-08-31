@@ -1,0 +1,4 @@
+interface:
+  display_name: "Job Scout"
+  short_description: "Find fitting jobs and prepare reviewed applications"
+  default_prompt: "Use $job-scout to find new fitting internships from my workspace evidence and prepare the best candidates for review."
