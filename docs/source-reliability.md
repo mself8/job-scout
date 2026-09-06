@@ -12,11 +12,14 @@
 |---|---|---|
 | Linkareer 목록 (`/list/intern`) | **가능** | 서버 렌더링. 페이지네이션 동작. 1차 소스로 사용 |
 | Linkareer 상세 (`/activity/<id>`) | **가능** | 요건·마감일까지 읽힘. 단 본문이 포스터 **이미지**뿐인 공고가 있음 |
-| JobKorea 검색 | 부분 | 회사·제목은 나오나 마감일이 자주 누락 |
+| JobKorea 검색 (`/Search/?stext=…&tabType=recruit`) | 부분 | 회사·제목·고용형태·근무지는 나오나 마감일이 자주 누락. 리드 발굴용 (2026-09-06 실측) |
+| JobKorea 상세 (`/Recruit/GI_Read/<id>`) | 부분 | 헤더(고용형태·학력·경력·접수기간·근무지·급여)는 읽힘, **본문(담당업무·우대)은 미렌더링**. 하드 게이트 판정엔 충분, 채점엔 부족 → verify-first (2026-09-06 실측) |
 | Incruit 목록 | 불가 | 메뉴 구조만 반환 |
 | Saramin 목록 | 불가 | 개별 기업 채용 페이지는 일부 읽힘 |
 | GreetingHR (`*.career.greetinghr.com`) | 불가 | HTTP 403 |
 | RocketPunch | 불가 | HTTP 403 |
+| Wanted 검색 | 불가 | ECONNRESET (2026-09-06) |
+| Linkareer 사이트 검색 (`/search?query=`) | 불가 | 검색어와 무관한 목록 5건만 반환 (2026-09-06) |
 | 웹 검색 (일반) | **위험** | 아래 참조 |
 
 ## 웹 검색의 실패 사례
