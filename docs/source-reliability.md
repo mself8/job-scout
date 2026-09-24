@@ -22,6 +22,24 @@
 | Linkareer 사이트 검색 (`/search?query=`) | 불가 | 검색어와 무관한 목록 5건만 반환 (2026-09-06) |
 | 웹 검색 (일반) | **위험** | 아래 참조 |
 
+## 2026-09-24 실측 — curl로 읽으면 달라진다
+
+위 표의 "불가"·"부분" 중 상당수는 웹 페치 도구 기준이었다. `curl`에 브라우저 User-Agent를 붙이면 아래가 읽힌다.
+
+| 소스 | 읽는 법 | 비고 |
+|---|---|---|
+| Linkareer 목록·상세 | `__NEXT_DATA__`의 Apollo 상태 | 목록은 `RECENT` 정렬·`page=N`, 상세는 `recruitCloseAt`·`education`·`applyDetail`(원문 링크)까지 |
+| Wanted | `/api/v4/jobs?country=kr&job_sort=job.latest_order&years=0&tag_type_ids=518&limit=100`, 상세 `/api/v4/jobs/<id>` | 검색 API(`search/summary`)는 500 |
+| Saramin | 검색 `/zf_user/search/recruit?searchword=…&recruitSort=reg_dt`, 본문 `/zf_user/jobs/relay/view-detail?rec_idx=<id>` | "사람인에서 수집한 공고"는 원문 재확인 |
+| JobKorea 상세 본문 | `/Recruit/GI_Read_Comt_Ifrm?Gno=<id>` | 헤더만 읽히던 문제 해결 |
+| GreetingHR | `*.career.greetinghr.com/ko/o/<id>`의 `__NEXT_DATA__` → `openingsInfo.detail` | 403 아님 |
+| NineHire (`*.ninehire.site`, `team.alwayz.co`) | `__NEXT_DATA__` → `recruitment.status` | `disabled`면 공고내림 |
+| 네이버클라우드 | 목록 JSON `/rcrt/loadJobList.do?lang=ko&firstIndex=0`, FAQ 답변 `/cnts.do?boardId=BRD0003&idx=<n>` | |
+| 카카오 공동체 | `careers.kakao.com/public/api/job-list?keyword=…` | |
+| RocketPunch | 불가 | 403 그대로 |
+| Jumpit 키워드 검색 | 무용 | "인턴" 키워드가 걸러지지 않음 |
+| 스마일게이트 상세 API | 불가 | 401. 잡코리아 iframe 본문으로 대체 |
+
 ## 웹 검색의 실패 사례
 
 인덱스가 낡아서 **마감된 공고를 열려 있다고 반환한다.** 실제로 관측된 것:
